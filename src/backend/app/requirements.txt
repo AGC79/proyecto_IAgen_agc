@@ -1,7 +1,8 @@
 flask
 python-dotenv
-groq
 sqlalchemy
 psycopg2-binary
 langchain
 langchain-groq
+langchain-core
+flask-cors
