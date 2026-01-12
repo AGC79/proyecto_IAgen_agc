@@ -35,7 +35,8 @@
         </div>
 
         <div class="flex-1 overflow-y-auto px-4" id="sidebar-history">
-            <p class="text-[10px] font-semibold text-zinc-600 mb-4 px-2 uppercase tracking-tight">Historial de interacciones</p>
+            <!-- Título del historial más grande (text-sm) -->
+            <p class="text-sm font-bold text-zinc-500 mb-4 px-2 uppercase tracking-tight">Historial de interacciones</p>
             <div id="history-items" class="space-y-1"></div>
         </div>
 
@@ -57,7 +58,7 @@
                 <p class="text-zinc-500 text-sm max-w-md leading-relaxed">
                     Identifique. Analice. Proteja.
                 </p>
-                <!-- ICONO DEL ESCUDO AÑADIDO DEBAJO -->
+                <!-- Icono del escudo -->
                 <div class="pt-4 opacity-20">
                     <svg class="w-12 h-12 mx-auto text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -80,7 +81,7 @@
                         Ejecutar
                     </button>
                 </div>
-                <p class="text-[9px] text-center mt-3 text-zinc-700 font-mono uppercase tracking-[0.2em]">Cyber Engine v1.0 Connected</p>
+                <p class="text-[9px] text-center mt-3 text-zinc-700 font-mono uppercase tracking-[0.2em]">Neural Engine v3.3 Connected</p>
             </div>
         </div>
     </main>
@@ -89,6 +90,7 @@
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
 
+        // Función para cargar el historial desde el backend
         async function loadHistory() {
             try {
                 const res = await fetch('http://localhost:5000/historial');
@@ -110,6 +112,7 @@
             } catch (e) { console.error("Error cargando historial"); }
         }
 
+        // Función para recuperar conversación en el chat principal
         function restoreConversation(q, a) {
             chatContainer.innerHTML = ''; 
             appendMessage('user', q);
@@ -121,6 +124,7 @@
             location.reload();
         }
 
+        // Función para procesar la consulta al backend
         async function processQuery() {
             const text = userInput.value.trim();
             if (!text) return;
@@ -147,11 +151,12 @@
                 appendMessage('ai', data.respuesta);
                 loadHistory(); 
             } catch (e) {
-                document.getElementById(loaderId).innerHTML = `<span class="text-red-900 text-[10px]">ERROR DE ENLACE SEGURO</span>`;
+                if (document.getElementById(loaderId)) document.getElementById(loaderId).innerHTML = `<span class="text-red-900 text-[10px]">ERROR DE ENLACE SEGURO</span>`;
             }
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
+        // Función para renderizar mensajes en el contenedor
         function appendMessage(role, content) {
             if (role === 'user') {
                 chatContainer.innerHTML += `
