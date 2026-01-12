@@ -1,0 +1,12 @@
+psql -U postgres
+\c chatbot_db
+\dt
+
+
+docker exec -it 820045cb4a61 bash
+
+docker logs chatbot_db 
+
+docker-compose down -v
+
+docker-compose build
