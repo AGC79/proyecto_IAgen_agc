@@ -39,5 +39,16 @@ services:
       iagen_db:
         condition: service_healthy 
 
+  frontend:
+    build:
+      context: ./fronthend
+    container_name: chatbot_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - FLASK_ENV=development
+
 volumes:
   pgdata:
