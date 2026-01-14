@@ -38,13 +38,13 @@ Este proyecto utiliza un flujo de despliegue basado en contenedores a través de
 
 Puedes acceder a las distintas interfaces de la infraestructura (Enero 2026):
 
-<ul>
-  <li><strong>Aplicación CyberAI (Chatbot):</strong> <a href="http://13.60.3.132:3000" target="_blank" rel="noopener noreferrer">Abrir Chatbot</a></li>
-  <li><strong>Gestión de Datos (pgAdmin):</strong> <a href="http://13.60.3.132:8080" target="_blank" rel="noopener noreferrer">Abrir pgAdmin</a></li>
-  <li><strong>API Health Check:</strong> <a href="http://13.60.3.132:5000/raiz_api" target="_blank" rel="noopener noreferrer">Ver Status API</a></li>
-</ul>
+### 🌐 Acceso a la Infraestructura (AWS)
 
+*   **🛡️ Aplicación CyberAI (Chatbot):** [http://13.60.3.132:3000](http://13.60.3.132:3000)
+*   **📊 Gestión de Datos (pgAdmin):** [http://13.60.3.132:8080](http://13.60.3.132:8080)
+*   **⚙️ API Health Check:** [http://13.60.3.132:5000/raiz_api](http://13.60.3.132:5000/raiz_api)
 
+> 💡 **Tip:** Haz `Ctrl + Clic` para abrir los servicios en una pestaña nueva.
 
 > **Nota:** El acceso está sujeto a las reglas de entrada (Inbound Rules) del **Security Group** de AWS para los puertos 3000, 5000 y 8080.
 
