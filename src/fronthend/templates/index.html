@@ -35,7 +35,6 @@
         </div>
 
         <div class="flex-1 overflow-y-auto px-4" id="sidebar-history">
-            <!-- Título del historial más grande (text-sm) -->
             <p class="text-sm font-bold text-zinc-500 mb-4 px-2 uppercase tracking-tight">Historial de interacciones</p>
             <div id="history-items" class="space-y-1"></div>
         </div>
@@ -58,7 +57,6 @@
                 <p class="text-zinc-500 text-sm max-w-md leading-relaxed">
                     Identifique. Analice. Proteja.
                 </p>
-                <!-- Icono del escudo -->
                 <div class="pt-4 opacity-20">
                     <svg class="w-12 h-12 mx-auto text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -93,7 +91,8 @@
         // Función para cargar el historial desde el backend
         async function loadHistory() {
             try {
-                const res = await fetch('http://localhost:5000/historial');
+                // CORRECCIÓN: IP Dinámica
+                const res = await fetch(`http://${window.location.hostname}:5000/historial`);
                 const data = await res.json();
                 const container = document.getElementById('history-items');
                 container.innerHTML = '';
@@ -112,7 +111,6 @@
             } catch (e) { console.error("Error cargando historial"); }
         }
 
-        // Función para recuperar conversación en el chat principal
         function restoreConversation(q, a) {
             chatContainer.innerHTML = ''; 
             appendMessage('user', q);
@@ -124,7 +122,6 @@
             location.reload();
         }
 
-        // Función para procesar la consulta al backend
         async function processQuery() {
             const text = userInput.value.trim();
             if (!text) return;
@@ -140,7 +137,8 @@
             chatContainer.innerHTML += `<div id="${loaderId}" class="text-[10px] font-mono text-zinc-600 animate-pulse uppercase tracking-widest">Ejecutando análisis...</div>`;
 
             try {
-                const response = await fetch('http://localhost:5000/chat', {
+                // CORRECCIÓN: IP Dinámica
+                const response = await fetch(`http://${window.location.hostname}:5000/chat`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({ pregunta: text })
@@ -156,7 +154,6 @@
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        // Función para renderizar mensajes en el contenedor
         function appendMessage(role, content) {
             if (role === 'user') {
                 chatContainer.innerHTML += `
@@ -167,13 +164,12 @@
                     </div>`;
             } else {
                 chatContainer.innerHTML += `
-                    <div class="flex flex-col space-y-4 mb-4">
-                        <div class="flex items-center gap-2">
-                            <div class="w-5 h-5 rounded bg-zinc-800 flex items-center justify-center text-[8px] border border-zinc-700">AI</div>
-                            <span class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Análisis Finalizado</span>
-                        </div>
-                        <div class="ai-bubble pl-6 text-sm leading-7 text-zinc-300">
-                            ${content.replace(/\n/g, '<br>')}
+                    <div class="flex justify-start mb-8 ai-bubble pl-4">
+                        <div class="max-w-[90%]">
+                            <p class="text-[10px] text-zinc-600 font-mono mb-2 uppercase tracking-widest">Respuesta CyberAI</p>
+                            <div class="text-sm leading-relaxed text-zinc-300">
+                                ${content}
+                            </div>
                         </div>
                     </div>`;
             }

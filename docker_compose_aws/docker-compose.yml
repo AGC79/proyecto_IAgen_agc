@@ -1,0 +1,56 @@
+services:
+  iagen_db:
+    image: agc79/cyber-chatbot-db:latest
+    container_name: chatbot_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: chatbot_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
+  pgadmin:
+    image: agc79/cyber-chatbot-pgadmin:latest
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+
+  backend:
+    image: agc79/cyber-chatbot-backend:latest
+    container_name: chatbot_api
+    restart: always
+
+    env_file:
+      - .env  
+    ports:
+      - "5000:5000"
+    depends_on:
+      iagen_db:
+        condition: service_healthy 
+
+  frontend:
+    image: agc79/cyber-chatbot-frontend:latest
+    container_name: chatbot_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - FLASK_ENV=production
+
+volumes:
+  pgdata:

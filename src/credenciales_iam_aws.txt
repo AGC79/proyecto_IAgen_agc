@@ -1,0 +1,12 @@
+Cuenta de AWS
+ID de cuenta
+
+993263774291
+Alias de cuenta
+Crear
+URL de inicio de sesión para los usuarios de IAM de esta cuenta
+
+https://993263774291.signin.aws.amazon.com/console
+
+AGC79
+GasteizCGA#3031*
