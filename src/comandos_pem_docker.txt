@@ -9,7 +9,7 @@ icacls.exe "C:\Users\Administrador\.ssh\cyberai_api_keys.pem" /inheritance:r
 icacls.exe "C:\Users\Administrador\.ssh\cyberai_api_keys.pem" /grant:r "$($env:USERNAME):R"
 
 ssh -i "C:\Users\Administrador\.ssh\cyberai_api_keys.pem" ubuntu@TU_IP_PUBLICA
-ssh -i "C:\Users\Administrador\.ssh\cyberai_api_keys.pem" ubuntu@13.60.3.132:3000
+ssh -i "C:\Users\Administrador\.ssh\cyberai_api_keys.pem" ubuntu@13.60.3.132
 
 scp -i "C:\Users\Administrador\.ssh\cyberai_api_keys.pem" .env ubuntu@13.60.3.13:/home/ubuntu/cyber_app/
 
